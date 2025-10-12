@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Semana4-ever</string>
+    <string name="ShowMsg1">Show Msg 1</string>
+    <string name="ShowMsg2">Show Msg 2</string>
+    <string name="OpenActivity">Open a screen</string>
+    <string name="Msg1">Showing message 1</string>
+    <string name="Msg2">Showing message 2</string>
+    <string name="MsgCancel">Cancelling action</string>
+    <string name="Cancel">Undo</string>
+</resources>

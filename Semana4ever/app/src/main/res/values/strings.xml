@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Semana4-ever</string>
+    <string name="ShowMsg1">Mostrar Msg 1</string>
+    <string name="ShowMsg2">Mostrar Msg 2</string>
+    <string name="OpenActivity">Abrir segunda pantalla</string>
+    <string name="Msg1">Mostrando mensaje 1</string>
+    <string name="Msg2">Mostrando Mensaje 2</string>
+    <string name="MsgCancel">Cancelando accion</string>
+    <string name="Cancel">Cancelar</string>
+</resources>
