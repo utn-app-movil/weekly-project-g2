@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">census</string>
+    <string name="ErrorMsgAdd">Error al agregar el dato</string>
+    <string name="ErrorMsgUpdate">Error al modificar el dato</string>
+    <string name="ErrorMsgRemove">Error al eliminar el dato.</string>
+    <string name="ErrorMsgGetAll">Error al obtener la lista de datos.</string>
+    <string name="ErrorMsgGetById">Error al obtener el dato especìfico.</string>
+</resources>
