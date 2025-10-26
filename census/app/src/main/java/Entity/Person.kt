@@ -19,6 +19,8 @@ class Person {
     private var longitude: Int=0
     private lateinit var photo: Bitmap
 
+    constructor()
+
     constructor(id: String, name: String, flastname: String
                 , slastname: String, phone: Int, email: String
                 , birthday: Date, province: Province, state: String

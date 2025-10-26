@@ -6,4 +6,19 @@
     <string name="ErrorMsgRemove">Error when removing the data.</string>
     <string name="ErrorMsgGetAll">Error when getting all data.</string>
     <string name="ErrorMsgGetById">Error when trying to get the specific data.</string>
+    <string name="MsgDataNotFound">The data was not found.</string>
+    <string name="btnPersonText_main">Add new person</string>
+    <string name="btnPeopleText_main">People List</string>
+    <string name="TextName">Name</string>
+    <string name="TextID">ID</string>
+    <string name="TextFLastName">First Last Name</string>
+    <string name="TextSLastName">Second Last Name</string>
+    <string name="TextEmail">Email</string>
+    <string name="TextPhone">Phone</string>
+    <string name="TextPhoto">Photo</string>
+    <string name="TextProvince">Province</string>
+    <string name="TextState">State</string>
+    <string name="TextDistrict">District</string>
+    <string name="TextAddress">Address</string>
+    <string name="TextBirthdate">Birthdate</string>
 </resources>

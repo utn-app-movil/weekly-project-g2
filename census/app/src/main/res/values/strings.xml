@@ -5,4 +5,19 @@
     <string name="ErrorMsgRemove">Error al eliminar el dato.</string>
     <string name="ErrorMsgGetAll">Error al obtener la lista de datos.</string>
     <string name="ErrorMsgGetById">Error al obtener el dato especìfico.</string>
+    <string name="MsgDataNotFound">El dato no fue encontrado.</string>
+    <string name="btnPersonText_main">Agregar persona</string>
+    <string name="btnPeopleText_main">Listar personas</string>
+    <string name="TextName">Nombre</string>
+    <string name="TextID">ID</string>
+    <string name="TextFLastName">Primer Apellido</string>
+    <string name="TextSLastName">Segundo Apellido</string>
+    <string name="TextEmail">Correo</string>
+    <string name="TextPhone">Telèfono</string>
+    <string name="TextPhoto">Foto</string>
+    <string name="TextProvince">Provincia</string>
+    <string name="TextState">Cantòn</string>
+    <string name="TextDistrict">Distrito</string>
+    <string name="TextAddress">Direcciòn</string>
+    <string name="TextBirthdate">Fecha nacimiento</string>
 </resources>
