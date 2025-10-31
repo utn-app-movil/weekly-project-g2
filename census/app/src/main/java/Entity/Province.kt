@@ -1,6 +1,5 @@
 package Entity
 
-
 class Province {
     private var name: String=""
     private lateinit var states: MutableList<String>
@@ -8,7 +7,7 @@ class Province {
 
     var Name: String
         get()= this.name
-        set(value){ this.name = value}
+        set(value) {this.name=value}
 
     var States: MutableList<String>
         get() = this.states

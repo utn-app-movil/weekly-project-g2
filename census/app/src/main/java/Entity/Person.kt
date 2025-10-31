@@ -1,7 +1,7 @@
 package Entity
 
 import android.graphics.Bitmap
-import java.util.Date
+import java.time.LocalDate
 
 class Person {
     private var id: String=""
@@ -10,21 +10,23 @@ class Person {
     private var sLastName: String=""
     private var phone: Int=0
     private var email: String=""
-    private lateinit var birthday: Date
+    private lateinit var birthday: LocalDate
     private lateinit var province: Province
     private var state: String=""
     private var district: String=""
     private var address: String=""
     private var latitude: Int=0
     private var longitude: Int=0
-    private lateinit var photo: Bitmap
+    private var photo: Bitmap? = null
 
     constructor()
 
     constructor(id: String, name: String, flastname: String
-                , slastname: String, phone: Int, email: String
-                , birthday: Date, province: Province, state: String
-                , district: String, address: String){
+            , slastname: String, phone: Int, email: String
+            , birthday: LocalDate, province: Province, state: String
+            , district: String, address: String, latitude: Int
+            , longitude: Int, photo: Bitmap?)
+    {
         this.id=id
         this.name=name
         this.fLastName=flastname
@@ -36,6 +38,9 @@ class Person {
         this.state=state
         this.district=district
         this.address=address
+        this.latitude=latitude
+        this.longitude=longitude
+        this.photo=photo
     }
 
     var ID: String
@@ -43,44 +48,56 @@ class Person {
         set(value) {this.id=value}
 
     var Name: String
-        get()=this.name
+        get() = this.name
         set(value) {this.name=value}
 
     var FLastName: String
-        get()=this.FLastName
-        set(value) {this.FLastName=value}
+        get() = this.fLastName
+        set(value) {this.fLastName=value}
 
     var SLastName: String
-        get()=this.SLastName
-        set(value) {this.SLastName=value}
+        get() = this.sLastName
+        set(value) {this.sLastName=value}
 
     var Phone: Int
-        get()=this.phone
+        get() = this.phone
         set(value) {this.phone=value}
 
-    var BirthDate: Date
-        get()=this.birthday
+    var Email: String
+        get() = this.email
+        set(value) {this.email=value}
+
+    var Birthday: LocalDate
+        get() = this.birthday
         set(value) {this.birthday=value}
 
     var Province: Province
-        get()=this.province
+        get() = this.province
         set(value) {this.province=value}
 
     var State: String
-        get()=this.state
+        get() = this.state
         set(value) {this.state=value}
 
     var District: String
-        get()=this.district
+        get() = this.district
         set(value) {this.district=value}
 
     var Address: String
-        get()=this.address
+        get() = this.address
         set(value) {this.address=value}
 
-    var Email: String
-        get()=this.email
-        set(value) {this.email=value}
+    var Latitude: Int
+        get() = this.latitude
+        set(value) {this.latitude=value}
+
+    var Longitude: Int
+        get() = this.longitude
+        set(value) {this.longitude=value}
+
+    var Photo: Bitmap?
+        get() = this.photo
+        set(value) {this.photo=value}
 
     fun FullName() = "$this.name $this.fLastName $this.sLastName"
 }

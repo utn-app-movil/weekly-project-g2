@@ -7,8 +7,8 @@ import android.content.Context
 import cr.ac.utn.census.R
 
 class PersonController {
-    private var dataManager: IDataManager= MemoryDataManager
-    private var context: Context
+    private var dataManager: IDataManager = MemoryDataManager
+    private  var context: Context
 
     constructor(context: Context){
         this.context=context
@@ -32,37 +32,19 @@ class PersonController {
         }
     }
 
-    fun getPeople(): List<Person>{
+    fun getById(id: String): Person?{
         try {
-            return dataManager.getAll()
-        }catch (e: Exception){
-            throw Exception(context
-                .getString(R.string.ErrorMsgGetAll))
-        }
-    }
-
-    fun getById(id: String): Person{
-        try {
-            val result = dataManager.getById(id)
-            if (result == null){
-                throw Exception(context
-                    .getString(R.string.ErrorMsgGetById))
-            }
-            return result
+            return dataManager.getById(id)
         }catch (e: Exception){
             throw Exception(context
                 .getString(R.string.ErrorMsgGetById))
         }
     }
 
-    fun getByFullName(id: String): Person{
+    fun getByFullName(fullname: String): Person?{
         try {
-            val result = dataManager.getByFullName(id)
-            if (result == null){
-                throw Exception(context
-                    .getString(R.string.ErrorMsgGetById))
-            }
-            return result
+            return dataManager.
+                getByFullName(fullname)
         }catch (e: Exception){
             throw Exception(context
                 .getString(R.string.ErrorMsgGetById))
@@ -74,7 +56,7 @@ class PersonController {
             val result = dataManager.getById(id)
             if (result == null){
                 throw Exception(context
-                    .getString(R.string.MsgDataNotFound))
+                    .getString(R.string.MsgDataNoFound))
             }
             dataManager.remove(id)
         }catch (e: Exception){
@@ -82,5 +64,4 @@ class PersonController {
                 .getString(R.string.ErrorMsgRemove))
         }
     }
-
 }
