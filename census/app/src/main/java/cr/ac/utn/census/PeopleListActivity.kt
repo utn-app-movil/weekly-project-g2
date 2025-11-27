@@ -32,13 +32,15 @@ class PeopleListActivity : AppCompatActivity(), OnItemClickListener {
         }
 
         val recycler =  findViewById<RecyclerView>(R.id.rvperson)
-        //val personController = PersonController(this)
-        val personController = PersonController(lifecycleScope)
-        customAdapter = PersonListAdapter(personController.getPeople(), this)
-        val layoutManager = LinearLayoutManager(applicationContext)
-        recycler.layoutManager = layoutManager
-        recycler.adapter = customAdapter
-        customAdapter.notifyDataSetChanged()
+        val personController = PersonController(this)
+        val selfContext = this
+        lifecycleScope.launch {
+            customAdapter = PersonListAdapter(personController.getPeople(), selfContext)
+            val layoutManager = LinearLayoutManager(applicationContext)
+            recycler.layoutManager = layoutManager
+            recycler.adapter = customAdapter
+            customAdapter.notifyDataSetChanged()
+        }
     }
 
     override fun onItemClicked(person: Person) {

@@ -66,7 +66,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             insets
         }
 
-        personController = PersonController(lifecycleScope)
+        personController = PersonController(this)
 
         txtId= findViewById<EditText>(R.id.txtId_person)
         txtName= findViewById<EditText>(R.id.txtName_person)
