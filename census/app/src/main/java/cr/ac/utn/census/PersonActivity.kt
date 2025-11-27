@@ -1,6 +1,7 @@
 package cr.ac.utn.census
 
 import Controller.PersonController
+import Entity.DTOProvince
 import Entity.Person
 import Entity.Province
 import Util.EXTRA_MESSAGE_PERSONID
@@ -29,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import java.io.File
 import java.time.LocalDate
 import java.util.Calendar
@@ -64,7 +66,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             insets
         }
 
-        personController = PersonController(this)
+        personController = PersonController(lifecycleScope)
 
         txtId= findViewById<EditText>(R.id.txtId_person)
         txtName= findViewById<EditText>(R.id.txtName_person)
@@ -199,8 +201,6 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 && (txtPhone.text.trim().isNotEmpty() && txtPhone.text.trim().length >= 8
                 && txtPhone.text.toString()?.toInt()!! != null && txtPhone.text.toString()?.toInt()!! != 0)
                 && dateparse != null
-
-
     }
 
     private fun cleanScreen(){
@@ -242,7 +242,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                         "dd/MM/yyyy")
                     person.Birthday = LocalDate.of(bDateParse?.year!!, bDateParse.month.value
                             , bDateParse?.dayOfMonth!!)
-                    val province = Province()
+                    val province = DTOProvince()
                     province.Name= txtProvince.text.toString()
                     person.Province = province
                     person.State = txtState.text.toString()
