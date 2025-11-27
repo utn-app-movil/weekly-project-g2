@@ -2,6 +2,7 @@ package Interface
 
 import Entity.DTOPerson
 import Entity.PersonGetResponse
+import Entity.PersonResponse
 import retrofit2.http.*
 import retrofit2.Call
 
@@ -14,5 +15,13 @@ interface IPeopleAPIService {
 
     @Headers("Content-Type: application/json")
     @POST("/people")
-    suspend fun postPerson (@Body person: DTOPerson): PersonGetResponse
+    suspend fun postPerson (@Body person: DTOPerson): PersonResponse
+
+    @Headers("Content-Type: application/json")
+    @PUT("/people")
+    suspend fun updatePerson (@Body person: DTOPerson): PersonResponse
+
+    @Headers("Content-Type: application/json")
+    @HTTP(method = "DELETE", path = "/people", hasBody = true)
+    suspend fun deletePerson (@Body person: DTOPerson): PersonResponse
 }

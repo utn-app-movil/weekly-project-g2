@@ -5,6 +5,7 @@ import Entity.DTOProvince
 import Entity.Person
 import Entity.Province
 import Util.EXTRA_MESSAGE_PERSONID
+import Util.Util
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
@@ -119,7 +120,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         return when (item.itemId){
             R.id.mnu_save ->{
                 if (isEditMode){
-                    Util.Util.showDialogCondition(this
+                    Util.showDialogCondition(this
                         , getString(R.string.TextSaveActionQuestion)
                         , { savePerson() })
                 }else{
@@ -128,7 +129,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 return true
             }
             R.id.mnu_delete ->{
-                Util.Util.showDialogCondition(this
+                Util.showDialogCondition(this
                     , getString(R.string.TextDeleteActionQuestion)
                     , { deletePerson() })
                 return true
@@ -154,12 +155,8 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         datePickerDialog.show()
     }
 
-    private fun getDateFormatString(dayOfMonth: Int, monthValue: Int, yearValue: Int): String{
-        return "${if (dayOfMonth < 10) "0" else ""}$dayOfMonth/${if (monthValue < 10) "0" else ""}$monthValue/$yearValue"
-    }
-
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        lbBirthdate.text=getDateFormatString(dayOfMonth, month+1, year)
+        lbBirthdate.text= Util.getDateFormatString(dayOfMonth, month+1, year)
     }
 
     private fun searchPerson(id: String){
@@ -175,7 +172,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                     txtSLastName.setText(person.SLastName)
                     txtEmail.setText(person.Email)
                     txtPhone.setText(person.Phone.toString())
-                    lbBirthdate.setText(getDateFormatString(person.Birthday.dayOfMonth
+                    lbBirthdate.setText(Util.getDateFormatString(person.Birthday.dayOfMonth
                         , person.Birthday.month.value, person.Birthday.year ))
                     txtProvince.setText(person.Province.Name)
                     txtState.setText(person.State)
@@ -184,7 +181,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                     year = person.Birthday.year
                     month = person.Birthday.month.value - 1
                     day = person.Birthday.dayOfMonth
-                    //menuItemDelete.isVisible = true
+                    menuItemDelete.isVisible = true
                     imgPhoto.setImageBitmap(person.Photo)
                 }else{
                     Toast.makeText(selfContext, getString(R.string.MsgDataNoFound),
@@ -199,7 +196,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     }
 
     fun isValidationData(): Boolean{
-        val dateparse = Util.Util.parseStringToDateModern(lbBirthdate.text.toString(), "dd/MM/yyyy")
+        val dateparse = Util.parseStringToDateModern(lbBirthdate.text.toString(), "dd/MM/yyyy")
         return txtId.text.trim().isNotEmpty() && txtName.text.trim().isNotEmpty()
                 && txtFLastName.text.trim().isNotEmpty() && txtSLastName.text.trim().isNotEmpty()
                 && txtEmail.text.trim().isNotEmpty() && lbBirthdate.text.trim().isNotEmpty()
@@ -246,7 +243,7 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                         person.Email = txtEmail.text.toString()
                         person.Phone = txtPhone.text.toString().toInt()
                         person.Photo = (imgPhoto?.drawable as BitmapDrawable).bitmap
-                        val bDateParse = Util.Util.parseStringToDateModern(lbBirthdate.text.toString(),
+                        val bDateParse = Util.parseStringToDateModern(lbBirthdate.text.toString(),
                             "dd/MM/yyyy")
                         person.Birthday = LocalDate.of(bDateParse?.year!!, bDateParse.month.value
                             , bDateParse?.dayOfMonth!!)
@@ -280,10 +277,12 @@ class PersonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     fun deletePerson(): Unit{
         try {
-            personController.removePerson(txtId.text.toString())
-            cleanScreen()
-            Toast.makeText(this, getString(R.string.MsgDeleteSuccess)
-                , Toast.LENGTH_LONG).show()
+            lifecycleScope.launch {
+                personController.removePerson(txtId.text.toString())
+                cleanScreen()
+                Toast.makeText(selfContext, getString(R.string.MsgDeleteSuccess)
+                    , Toast.LENGTH_LONG).show()
+            }
         }catch (e: Exception){
             Toast.makeText(this, e.message.toString()
                 , Toast.LENGTH_LONG).show()
