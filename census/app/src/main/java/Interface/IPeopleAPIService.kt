@@ -9,7 +9,7 @@ interface IPeopleAPIService {
     @GET("/people")
     suspend fun getAll(): PersonGetResponse
 
-    @GET("/people/{id")
+    @GET("/people/{id}")
     suspend fun getbyId(@Path("id") personId: String): PersonGetResponse
 
     @Headers("Content-Type: application/json")

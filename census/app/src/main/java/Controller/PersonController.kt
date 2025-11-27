@@ -72,53 +72,35 @@ class PersonController {
         return people
     }
 
-    /*fun getPeople2(): List<Person>{
-        var people = mutableListOf<Person>()
-        scope.launch {
-            try {
-                val response = CensusAPIService.apiPeople.getAll()
-                response.data.forEach { item ->
-                    val person = Person()
-                    person.ID= item.ID
-                    person.Name= item.Name
-                    person.FLastName= item.FLastName
-                    person.SLastName= item.SLastName
-                    person.Email= item.Email
-                    person.Phone= item.Phone
-                    person.Province= item.Province
-                    person.State= item.State
-                    person.Address= item.Address
-                    people.add(person)
-                    //person.Birthday= Util.parseStringToDateModern() item.Birthday
-                    //person.Photo= item.Photo
-                }
-                // Update UI or log success
-                Log.d("API_Call", "Success: ${response.data}")
-            } catch (e: Exception) {
-                // Handle error
-                Log.e("API_Call", "Error fetching data: ${e.message}")
+    suspend fun getById(id: String): Person?{
+        var person: Person?
+        try {
+            person = null
+            val response = CensusAPIService.apiPeople.getbyId(id)
+            Log.d("API_Call", "Success: ${response.data}")
+            if (response.data.any()){
+                val item = response.data[0]
+                person = Person()
+                person.ID= item.ID
+                person.Name= item.Name
+                person.FLastName= item.FLastName
+                person.SLastName= item.SLastName
+                person.Email= item.Email
+                person.Phone= item.Phone
+                person.Province= item.Province
+                person.State= item.State
+                person.Address= item.Address
+                val bDateParse = Util.parseStringToDateModern(item.Birthday,
+                    "dd/MM/yyyy")
+                person.Birthday = LocalDate.of(bDateParse?.year!!, bDateParse.month.value
+                    , bDateParse?.dayOfMonth!!)
+                //person.Photo= item.Photo
             }
-        }
-        return people
-    }*/
-
-    fun getById(id: String): Person?{
-        try {
-            return dataManager.getById(id)
         }catch (e: Exception){
             throw Exception(context
                 .getString(R.string.ErrorMsgGetById))
         }
-    }
-
-    fun getByFullName(fullname: String): Person?{
-        try {
-            return dataManager.
-                getByFullName(fullname)
-        }catch (e: Exception){
-            throw Exception(context
-                .getString(R.string.ErrorMsgGetById))
-        }
+        return person
     }
 
     fun removePerson(id: String){
